@@ -1,0 +1,23 @@
+{
+  "name": "phoneBook",
+  "version": "0.0.0",
+  "homepage": "https://github.com/DenisPustuev/phoneBook",
+  "authors": [
+    "Denis Pustuev <pustuev.denis@gmail.com>"
+  ],
+  "description": "simple phone book app",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.1.4",
+    "angular": "~1.4.0",
+    "bootstrap": "~3.3.4",
+    "less.js": "~2.5.1"
+  }
+}

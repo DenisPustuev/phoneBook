@@ -1,0 +1,24 @@
+{
+  "name": "phone-book",
+  "version": "1.0.0",
+  "description": "simple app on angular",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-uglify": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DenisPustuev/phoneBook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DenisPustuev/phoneBook/issues"
+  },
+  "homepage": "https://github.com/DenisPustuev/phoneBook#readme"
+}
