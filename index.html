@@ -1,10 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="phoneBookApp">
 <head>
     <meta charset="UTF-8">
     <title>Phone Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="dist/css/main.css"/>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="src/js/app.js"></script>
 </head>
 <body>
-sdf
+<header class="navbar-inverse">
+    <h1>Phone book</h1>
+</header>
+<section class="container-fluid" ng-controller="phoneBookCtrl">
+    <aside class="col-md-3 contacts-list">
+        <ul class="list-unstyled">
+            <li ng-repeat="contact in contacts">
+                <span>{{contact.name}}</span>
+            </li>
+        </ul>
+    </aside>
+    <main class="col-md-9 contact-details"></main>
+</section>
 </body>
 </html>
