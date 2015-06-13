@@ -33,11 +33,18 @@ h1 {
 }
 .contact .contactAnchor {
   position: absolute;
-  top: 15px;
+  top: 30px;
   left: -30px;
   font-size: 20px;
   line-height: 1;
   color: #333;
+}
+.contact .contact-avatar {
+  max-width: 50px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 .contact:hover {
   background: #2980b9;
@@ -54,4 +61,8 @@ h1 {
 .contact-details .add-to-fav {
   font-size: 20px;
   color: #FFFFFF;
+}
+.contact-details-content .table td:first-child {
+  width: 150px;
+  padding-left: 30px;
 }

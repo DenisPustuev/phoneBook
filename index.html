@@ -23,8 +23,10 @@
                 <input type="text" id="search" ng-model="search.name" class="form-control contact-search"/>
 
                 <ul class="list-unstyled">
-                    <li ng-repeat="contact in contacts | filter: search | orderBy: 'name' as contactsOrdered" class="contact" ng-click="showContactDetails(contact)">
+                    <li ng-repeat="contact in contacts | filter: search" class="contact" ng-click="showContactDetails(contact)">
+
                         <span class="contactAnchor" ng-show="showAnchor($index)">{{contact.name[0]}}</span>
+                        <img src="{{contact.avatar}}" alt="" class="contact-avatar"/>
                         <span class="contactName">{{contact.name}}</span>
                     </li>
                 </ul>
@@ -39,6 +41,10 @@
             </div>
             <div class="row contact-details-content">
                 <table class="table">
+                    <tr>
+                        <td>Name</td>
+                        <td class="contact-tel">{{currentContact.name}}</td>
+                    </tr>
                     <tr>
                         <td>Tel</td>
                         <td class="contact-tel">{{currentContact.phone}}</td>
