@@ -19,7 +19,7 @@ phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', function($scope, $h
 
     };
 
-    $scope.currentContact = $scope.contactsOrdered[0];
+    //$scope.currentContact = $scope.contactsOrdered[0];
 
     $scope.showContactDetails = function (contact) {
         $scope.currentContact = contact;
