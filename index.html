@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Phone Book</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="dist/css/main.css"/>
 
     <script src="bower_components/angular/angular.js"></script>
@@ -15,20 +15,49 @@
     <h1>Phone book</h1>
 </header>
 <section class="container-fluid" ng-controller="phoneBookCtrl">
-    <aside class="col-md-3 contacts-list">
+    <div class="row">
+        <aside class="col-md-3 contacts-list">
 
-        <input type="text" ng-model="search.name" class="form-control contact-search"/>
+            <div class="aside-scroll-wrap">
+                <label for="search">Search</label>
+                <input type="text" id="search" ng-model="search.name" class="form-control contact-search"/>
 
-        <ul class="list-unstyled">
-            <li ng-repeat="contact in contacts | filter: search | orderBy: 'name' as contactsOrdered" class="contact">
-                <span class="contactAnchor" ng-show="showAnchor($index)">{{contact.name[0]}}</span>
-                <span class="contactName">{{contact.name}}</span>
-            </li>
-        </ul>
-    </aside>
-    <main class="col-md-9 contact-details">
+                <ul class="list-unstyled">
+                    <li ng-repeat="contact in contacts | filter: search | orderBy: 'name' as contactsOrdered" class="contact" ng-click="showContactDetails(contact)">
+                        <span class="contactAnchor" ng-show="showAnchor($index)">{{contact.name[0]}}</span>
+                        <span class="contactName">{{contact.name}}</span>
+                    </li>
+                </ul>
+            </div>
 
-    </main>
+        </aside>
+        <main class="col-md-9 col-md-offset-3 contact-details">
+            <div class="row contact-ctrl-panel clearfix">
+                <div class="pull-right btns-wrap">
+                    <a href="#" class="add-to-fav"><span class="glyphicon glyphicon-star-empty"></span></a>
+                </div>
+            </div>
+            <div class="row contact-details-content">
+                <table class="table">
+                    <tr>
+                        <td>Tel</td>
+                        <td class="contact-tel">{{currentContact.phone}}</td>
+                    </tr>
+                    <tr>
+                        <td>E-mail</td>
+                        <td class="contact-mail">{{currentContact.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>website</td>
+                        <td class="contact-website">{{currentContact.website}}</td>
+                    </tr>
+
+                </table>
+            </div>
+        </main>
+    </div>
+
+
 </section>
 </body>
 </html>

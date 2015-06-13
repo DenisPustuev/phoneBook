@@ -9,10 +9,19 @@ phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', function($scope, $h
     $scope.showAnchor = function ($index){
 
         var thisAnchor = $scope.contactsOrdered[$index].name[0];
-        var prevAnchor = $scope.contactsOrdered[$index - 1].name[0];
+        var prevAnchor;
+
+        if($index >0){
+            prevAnchor = $scope.contactsOrdered[$index - 1].name[0];
+        }
 
         return (thisAnchor !== prevAnchor);
 
-    }
+    };
 
+    $scope.currentContact = $scope.contactsOrdered[0];
+
+    $scope.showContactDetails = function (contact) {
+        $scope.currentContact = contact;
+    }
 }]);

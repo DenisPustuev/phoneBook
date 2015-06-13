@@ -1,21 +1,35 @@
 header {
-  padding: 15px 0;
+  height: 60px;
   background: #2c3e50;
 }
 h1 {
   text-align: center;
   color: #FFFFFF;
   margin: 0;
+  line-height: 60px;
+}
+.contacts-list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding-top: 60px;
+  padding-right: 0;
+}
+.contacts-list .aside-scroll-wrap {
+  padding-top: 20px;
+  overflow: auto;
+  height: 100%;
 }
 .contact-search {
   margin-bottom: 20px;
-  margin-top: 20px;
 }
 .contact {
-  padding: 15px 0;
+  padding: 15px 0 15px 15px;
   margin-left: 30px;
   position: relative;
   border-bottom: 1px solid #e3e3e3;
+  cursor: pointer;
 }
 .contact .contactAnchor {
   position: absolute;
@@ -23,7 +37,21 @@ h1 {
   left: -30px;
   font-size: 20px;
   line-height: 1;
+  color: #333;
 }
-.contact .contactName {
-  cursor: pointer;
+.contact:hover {
+  background: #2980b9;
+  color: #FFFFFF;
+}
+.contact-details .contact-ctrl-panel {
+  height: 40px;
+  line-height: 40px;
+  background: #95a5a6;
+}
+.contact-details .btns-wrap {
+  margin-right: 30px;
+}
+.contact-details .add-to-fav {
+  font-size: 20px;
+  color: #FFFFFF;
 }
