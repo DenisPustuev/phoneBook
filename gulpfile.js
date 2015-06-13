@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var watchLess = require('gulp-watch-less');
 var less = require('gulp-less');
 
+var less_sources = {main: 'src/less/main.less', dev: 'src/less/**/*.less'};
 /*gulp.task('scripts', function() {
     return gulp.src('src/js/!*.js')
         .pipe(concat('all.min.js'))
@@ -19,5 +20,7 @@ gulp.task('less', function(){
         .pipe(less())
         .pipe(gulp.dest('dist/css'));
 });
-
-gulp.task('default', ['less']);
+gulp.task('watch', function() {
+    gulp.watch(less_sources.main, ['less']);
+});
+gulp.task('default', ['less', 'watch']);

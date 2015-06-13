@@ -1,11 +1,18 @@
 var phoneBookApp = angular.module('phoneBookApp', []);
 
 phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', function($scope, $http){
-   /* var req = {
-        method: 'GET',
-        dataType: 'jsonp'
-    }*/
-    $http.get('http://demo.sibers.com/users').success(function (data) {
+
+    $http.get('users.json').success(function (data) {
         $scope.contacts = data;
-    })
+    });
+
+    $scope.showAnchor = function ($index){
+
+        var thisAnchor = $scope.contactsOrdered[$index].name[0];
+        var prevAnchor = $scope.contactsOrdered[$index - 1].name[0];
+
+        return (thisAnchor !== prevAnchor);
+
+    }
+
 }]);

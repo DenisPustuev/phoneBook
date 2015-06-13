@@ -1,12 +1,29 @@
-body {
-  margin: 0;
-  padding: 0;
-}
 header {
-  padding : 20px;
+  padding: 15px 0;
+  background: #2c3e50;
 }
 h1 {
   text-align: center;
-  margin : 0;
-  color : #FFFFFF;
+  color: #FFFFFF;
+  margin: 0;
+}
+.contact-search {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.contact {
+  padding: 15px 0;
+  margin-left: 30px;
+  position: relative;
+  border-bottom: 1px solid #e3e3e3;
+}
+.contact .contactAnchor {
+  position: absolute;
+  top: 15px;
+  left: -30px;
+  font-size: 20px;
+  line-height: 1;
+}
+.contact .contactName {
+  cursor: pointer;
 }
