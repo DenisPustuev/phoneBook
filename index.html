@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="dist/css/main.css"/>
 
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="src/js/app.js"></script>
 </head>
 <body>
@@ -16,27 +17,52 @@
 </header>
 <section class="container-fluid" ng-controller="phoneBookCtrl">
     <div class="row">
-        <aside class="col-md-3 contacts-list">
+        <!--left sidebar with contacts list-->
+        <aside class="col-md-3 col-sm-6 contacts-list">
 
             <div class="aside-scroll-wrap">
-                <label for="search">Search</label>
-                <input type="text" id="search" ng-model="search.name" class="form-control contact-search"/>
 
-                <ul class="list-unstyled">
-                    <li ng-repeat="contact in contacts | filter: search" class="contact" ng-click="showContactDetails(contact)">
+                <!-- search input-->
+                <div class="search-wrap col-md-3 col-sm-6">
+                    <label for="search">Search</label>
+                    <input type="text" id="search" ng-model="search.name" class="form-control contact-search"/>
+                </div>
+
+                <!--favourites contacts list-->
+                <ul class="list-unstyled fav-contacts">
+                    <li ng-repeat="favContact in favContacts |filter: search" class="contact active-{{favContact.active}}" ng-click="showContactDetails(allContacts, favContact)">
+                        <span class="contactAnchor" ng-show="showFavAnchor($index)">
+                            <span class="glyphicon glyphicon-star"></span>
+                        </span>
+
+                        <img src="{{favContact.avatar}}" alt="" class="contact-avatar"/>
+
+                        <span class="contactName">{{favContact.name}}</span>
+
+                    </li>
+                </ul>
+
+                <!--all contacts list-->
+                <ul class="list-unstyled all-contacts">
+                    <li ng-repeat="contact in allContacts | filter: search" class="contact active-{{contact.active}}" ng-click="showContactDetails(allContacts, contact)">
 
                         <span class="contactAnchor" ng-show="showAnchor($index)">{{contact.name[0]}}</span>
+
                         <img src="{{contact.avatar}}" alt="" class="contact-avatar"/>
+
                         <span class="contactName">{{contact.name}}</span>
+
                     </li>
                 </ul>
             </div>
 
         </aside>
-        <main class="col-md-9 col-md-offset-3 contact-details">
+        <main class="col-md-9 col-sm-6 col-sm-offset-6 col-md-offset-3 contact-details">
             <div class="row contact-ctrl-panel clearfix">
                 <div class="pull-right btns-wrap">
-                    <a href="#" class="add-to-fav"><span class="glyphicon glyphicon-star-empty"></span></a>
+                    <div class="add-to-fav" ng-click="favCtrlFunc(currentContact)">
+                        <span class="glyphicon glyphicon-star{{currentContactIsFav(currentContact)}}"></span>
+                    </div>
                 </div>
             </div>
             <div class="row contact-details-content">

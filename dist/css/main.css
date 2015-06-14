@@ -13,16 +13,23 @@ h1 {
   top: 0;
   left: 0;
   height: 100%;
-  padding-top: 60px;
+  padding-top: 139px;
   padding-right: 0;
 }
 .contacts-list .aside-scroll-wrap {
-  padding-top: 20px;
   overflow: auto;
   height: 100%;
 }
+.contacts-list .aside-scroll-wrap .search-wrap {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  background: #FFFFFF;
+  z-index: 99;
+  padding-top: 10px;
+}
 .contact-search {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .contact {
   padding: 15px 0 15px 15px;
@@ -31,7 +38,7 @@ h1 {
   border-bottom: 1px solid #e3e3e3;
   cursor: pointer;
 }
-.contact .contactAnchor {
+.contactAnchor {
   position: absolute;
   top: 30px;
   left: -30px;
@@ -39,14 +46,15 @@ h1 {
   line-height: 1;
   color: #333;
 }
-.contact .contact-avatar {
+.contact-avatar {
   max-width: 50px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
   margin-right: 5px;
 }
-.contact:hover {
+.contact:hover,
+.contact.active-true {
   background: #2980b9;
   color: #FFFFFF;
 }
@@ -59,8 +67,16 @@ h1 {
   margin-right: 30px;
 }
 .contact-details .add-to-fav {
+  cursor: pointer;
+}
+.glyphicon-star-empty,
+.glyphicon-star {
   font-size: 20px;
-  color: #FFFFFF;
+  color: #ffcc39;
+  vertical-align: middle;
+}
+.glyphicon-star-empty {
+  color: #5e5e5e;
 }
 .contact-details-content .table td:first-child {
   width: 150px;
