@@ -27,7 +27,6 @@ phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', '$filter', 'localSt
     }
 
 
-
     $scope.showAnchor = function ($index){
 
         var thisAnchor = $scope.allContacts[$index].name[0];
@@ -58,7 +57,7 @@ phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', '$filter', 'localSt
     };
 
 
-    $scope.favCtrlFunc = function (currentContact) {
+    $scope.toggleFavourites = function (currentContact) {
 
         if(currentContact.favorite){
             $scope.favContacts.splice($scope.favContacts.indexOf(currentContact), 1);
