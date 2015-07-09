@@ -6,26 +6,88 @@ phoneBookApp.config(function (localStorageServiceProvider) {
         .setStorageCookie(0, '/');
 });
 
-phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', '$filter', 'localStorageService', function($scope, $http, $filter, localStorageService){
+phoneBookApp.service('getContactsService', ['localStorageService', '$http', function (localStorageService, $http) {
 
-    if(localStorageService.isSupported){
+    var allContacts;
+    var currentContact;
+    var favContacts = [];
 
-        if(localStorageService.length()){
-            //localStorageService.clearAll();
-            var allContacts = localStorageService.get('allContacts');
+    /*local storage logic*/
+    /*if (localStorageService.length()) {
 
-            getContacts(allContacts);
+        allContacts = localStorageService.get('allContacts');
 
-        }else{
-            $http.get('users.json').success(function (data) {
+    } else */if(localStorageService.cookie.get('allContacts') !== null){
 
-                getContacts(data);
+        allContacts = localStorageService.cookie.get('allContacts');
 
-            });
-        }
-
+    }else {
+        $http.get('users.json').success(function (data) {
+            allContacts = data;
+            //console.log(allContacts, 3)
+        });
     }
 
+    console.log(allContacts, 1);
+    /*getting active contact and favourites contacts*/
+
+    if(allContacts !== undefined){
+        angular.forEach(allContacts, function(obj) {
+
+            if(obj.active == true){
+                currentContact = obj;
+            }
+
+            if(obj.favorite){
+                this.push(obj);
+            }
+        }, favContacts);
+
+        /*choosing first active contact if app loads at first time*/
+        if(currentContact == undefined){
+            if(favContacts.length > 0){
+
+                currentContact = favContacts[0];
+            }else{
+                currentContact = allContacts[0];
+            }
+
+            currentContact.active = true;
+        }
+
+        this.getAllContacts = function () {
+            return allContacts;
+        };
+
+        this.getCurrentContact = function () {
+            return currentContact;
+        };
+
+        this.getFavContacts = function () {
+            return favContacts;
+        }
+    }
+
+}]);
+
+phoneBookApp.controller('phoneBookCtrl', ['$scope', '$filter', 'localStorageService', 'getContactsService', function($scope, $filter, localStorageService, getContactsService){
+
+    $scope.allContacts = $filter('orderBy')(getContactsService.getAllContacts(), 'name');
+    console.log($scope.allContacts, 2)
+
+    $scope.currentContact = getContactsService.getCurrentContact();
+
+    $scope.favContacts = getContactsService.getFavContacts();
+
+
+
+    $scope.currentContactIsFav = function (currentContact) {
+        if(currentContact.favorite){
+            return ""
+        }else{
+            return "-empty"
+        }
+    };
 
     $scope.showAnchor = function ($index){
 
@@ -53,7 +115,13 @@ phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', '$filter', 'localSt
         }
         $scope.currentContact = contact;
         $scope.currentContact.active = true;
-        localStorageService.set('allContacts', $scope.allContacts);
+
+        /*if(localStorageService.isSupported){
+            localStorageService.set('allContacts', $scope.allContacts);
+        }else{*/
+            localStorageService.cookie.set('allContacts', $scope.allContacts);
+        //}
+
     };
 
 
@@ -74,40 +142,5 @@ phoneBookApp.controller('phoneBookCtrl', ['$scope', '$http', '$filter', 'localSt
 
     };
 
-    function getContacts(contactsObj) {
-        $scope.allContacts = $filter('orderBy')(contactsObj, 'name');
-
-        $scope.favContacts = [];
-
-        angular.forEach($scope.allContacts, function(obj) {
-
-            if(obj.active == true){
-                $scope.currentContact = obj;
-            }
-
-            if(obj.favorite){
-                this.push(obj);
-            }
-        }, $scope.favContacts);
-
-        if($scope.currentContact == undefined){
-            if($scope.favContacts.length > 0){
-
-                $scope.currentContact = $scope.favContacts[0];
-            }else{
-                $scope.currentContact = $scope.allContacts[0];
-            }
-
-            $scope.currentContact.active = true;
-        }
-
-        $scope.currentContactIsFav = function (currentContact) {
-            if(currentContact.favorite){
-                return ""
-            }else{
-                return "-empty"
-            }
-        }
-    }
-
 }]);
+
