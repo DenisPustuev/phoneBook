@@ -30,6 +30,7 @@
 
 
     }]);
+
     phoneBookApp.controller('phoneBookCtrl', ['$scope', '$filter', 'localStorageService', 'getContactsService', function ($scope, $filter, localStorageService, getContactsService) {
 
         //localStorageService.cookie.clearAll()
