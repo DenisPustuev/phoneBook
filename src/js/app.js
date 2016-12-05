@@ -14,7 +14,7 @@
 
         this.getAllContacts = function () {
 
-            /*get contacts from localstorage or cookies or server*/
+            /*get contacts from localstorage or from server*/
 
             if(localStorageService.get('allContacts') !== null) {
 
@@ -37,6 +37,7 @@
         $scope.favContacts = [];
 
         /*using promise if there isn't saved contacts in localstorage or coockies*/
+        console.log(getContactsService);
         getContactsService.getAllContacts().then(function (data) {
 
             $scope.allContacts = $filter('orderBy')(data, 'name');
