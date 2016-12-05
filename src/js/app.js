@@ -8,27 +8,26 @@
     });
 
     /*https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=angular+wait+until+ajax+get+json+in+service*/
-    phoneBookApp.service('getContactsService', ['localStorageService', '$http', function (localStorageService, $http) {
-
-        //var allContacts = null;
+    phoneBookApp.service('getContactsService', ['localStorageService', '$http', '$q', function (localStorageService, $http, $q) {
 
         this.getAllContacts = function () {
+            var deferred = $q.defer();
+            var contacts;
 
             /*get contacts from localstorage or from server*/
-
             if(localStorageService.get('allContacts') !== null) {
-
-             return localStorageService.get('allContacts');
-
+                contacts = localStorageService.get('allContacts');
+                deferred.resolve(contacts);
             } else {
-               return $http.get('users.json').then(function (result) {
-                    return result.data;
+                $http.get('users.json').then(function (result) {
+                    contacts = result.data;
+                    deferred.resolve(contacts);
                 });
             }
 
+            contacts = deferred.promise;
+            return $q.when(contacts);
         };
-
-
     }]);
 
     phoneBookApp.controller('phoneBookCtrl', ['$scope', '$filter', 'localStorageService', 'getContactsService', function ($scope, $filter, localStorageService, getContactsService) {
@@ -37,7 +36,7 @@
         $scope.favContacts = [];
 
         /*using promise if there isn't saved contacts in localstorage or coockies*/
-        console.log(getContactsService);
+
         getContactsService.getAllContacts().then(function (data) {
 
             $scope.allContacts = $filter('orderBy')(data, 'name');
@@ -121,22 +120,5 @@
             };
 
         });
-
-        //console.log($scope.allContacts, 2)
-
-        /*getting active contact and favourites contacts*/
-
-
-
-        //$scope.currentContact = getContactsService.getCurrentContact();
-
-        //$scope.favContacts = getContactsService.getFavContacts();
-
-
-
-
-
-
-
     }]);
 })();

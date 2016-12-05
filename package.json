@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/DenisPustuev/phoneBook/issues"
   },
-  "homepage": "https://github.com/DenisPustuev/phoneBook#readme"
+  "homepage": "https://github.com/DenisPustuev/phoneBook#readme",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
 }
